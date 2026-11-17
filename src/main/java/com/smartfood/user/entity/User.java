@@ -1,6 +1,6 @@
 package com.smartfood.user.entity;
 
-import com.smartfood.user.enums.UserRole;
+import com.smartfood.user.entity.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

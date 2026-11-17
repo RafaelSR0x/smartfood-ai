@@ -1,4 +1,4 @@
-package com.smartfood.user.enums;
+package com.smartfood.user.entity.enums;
 
 public enum UserRole {
     CUSTOMER("customer"),
