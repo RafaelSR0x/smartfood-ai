@@ -2,6 +2,9 @@ package com.smartfood.user.entity;
 
 import com.smartfood.user.entity.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -37,4 +40,11 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public User(String name, String email, String password, UserRole userRole) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = userRole;
+    }
 }
