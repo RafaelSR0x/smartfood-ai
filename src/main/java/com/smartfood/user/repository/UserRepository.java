@@ -2,10 +2,9 @@ package com.smartfood.user.repository;
 
 import com.smartfood.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
-    User findByEmail(String email);
-
-    boolean existsByEmail(String email);
+    UserDetails findByEmail(String email);
 }
