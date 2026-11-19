@@ -1,8 +1,8 @@
 package com.smartfood.user.service;
 
 import com.smartfood.infra.security.TokenService;
-import com.smartfood.user.dto.AuthenticationDTO;
-import com.smartfood.user.dto.UserRequestDTO;
+import com.smartfood.user.dto.request.AuthenticationDTO;
+import com.smartfood.user.dto.request.UserRequestDTO;
 import com.smartfood.user.entity.User;
 import com.smartfood.user.entity.enums.UserRole;
 import com.smartfood.user.repository.UserRepository;

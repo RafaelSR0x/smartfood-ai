@@ -1,4 +1,4 @@
-package com.smartfood.user.dto;
+package com.smartfood.user.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

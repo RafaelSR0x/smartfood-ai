@@ -1,4 +1,4 @@
-package com.smartfood.user.dto;
+package com.smartfood.user.dto.response;
 
 import com.smartfood.user.entity.User;
 
@@ -14,8 +14,9 @@ public record UserResponseDTO(
         return new UserResponseDTO(
                 user.getName(),
                 user.getEmail(),
-                user.getUpdatedAt(),
-                user.getCreatedAt()
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+
         );
     }
 }
