@@ -41,12 +41,12 @@ public class SecurityConfigurations {
     }
 
     @Bean
-    private AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    private PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
