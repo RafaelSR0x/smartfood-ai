@@ -18,10 +18,8 @@ public class AuthenticationService {
     @Autowired
     private UserRepository userRepository;
 
-    @Bean
-    private PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public User userRegister(UserRequestDTO data) {
 
@@ -29,7 +27,7 @@ public class AuthenticationService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Este email já existe.");
         }
 
-        String encryptedPassword = passwordEncoder().encode(data.password());
+        String encryptedPassword = passwordEncoder.encode(data.password());
 
         User newUser = new User( data.name(),data.email(), encryptedPassword, UserRole.CUSTOMER);
 
