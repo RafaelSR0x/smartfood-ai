@@ -9,6 +9,7 @@ import com.smartfood.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,16 @@ public class AuthenticationService {
 
     public String login(AuthenticationDTO data) {
         var emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
-        var authentication = this.authenticationManager.authenticate(emailPassword);
+        try {
+            var authentication = this.authenticationManager.authenticate(emailPassword);
 
-        return tokenService.generateToken((User) authentication.getPrincipal());
+            return tokenService.generateToken((User) authentication.getPrincipal());
+        } catch (BadCredentialsException exception) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Email ou senha inválidos.",
+                    exception
+            );
+        }
     }
 }
