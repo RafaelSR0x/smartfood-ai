@@ -2,6 +2,7 @@ package com.smartfood.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.smartfood.user.entity.User;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ public class TokenService {
                     .sign(algorithm);
 
             return token;
-        }catch (JWTVerificationException exception) {
+        }catch (JWTCreationException exception) {
             throw new RuntimeException("Erro ao gerar o token", exception);
         }
     }
