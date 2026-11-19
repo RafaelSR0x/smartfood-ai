@@ -1,6 +1,7 @@
 package com.smartfood.user.controller;
 
-import com.smartfood.user.dto.UserRequestDTO;
+import com.smartfood.user.dto.request.AuthenticationDTO;
+import com.smartfood.user.dto.request.UserRequestDTO;
 import com.smartfood.user.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class AuthenticationController {
         this.service.userRegister(data);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody @Valid AuthenticationDTO data) {
+        var response = this.service.login(data);
+
+        return ResponseEntity.ok(response);
     }
 }
