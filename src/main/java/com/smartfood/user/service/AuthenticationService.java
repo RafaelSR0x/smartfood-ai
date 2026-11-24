@@ -1,7 +1,9 @@
 package com.smartfood.user.service;
 
 import com.smartfood.infra.security.TokenService;
+import com.smartfood.restaurant.service.RestaurantService;
 import com.smartfood.user.dto.request.AuthenticationDTO;
+import com.smartfood.user.dto.request.RestaurantOwnerResgisterDTO;
 import com.smartfood.user.dto.request.UserRequestDTO;
 import com.smartfood.user.entity.User;
 import com.smartfood.user.entity.enums.UserRole;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -30,6 +33,9 @@ public class AuthenticationService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private RestaurantService restaurantService;
+
     public User userRegister(UserRequestDTO data) {
 
         if (this.userRepository.findByEmail(data.email()) != null) {
@@ -41,6 +47,23 @@ public class AuthenticationService {
         User newUser = new User( data.name(),data.email(), encryptedPassword, UserRole.CUSTOMER);
 
         return userRepository.save(newUser);
+    }
+
+    @Transactional
+    public User registerRestaurantOwner(RestaurantOwnerResgisterDTO data){
+        if (this.userRepository.findByEmail(data.email()) != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Este email já existe.");
+        }
+
+        String encryptedPassword = passwordEncoder.encode(data.password());
+
+        User newUser = new User( data.name(),data.email(), encryptedPassword, UserRole.RESTAURANT_OWNER);
+
+        User savedUser = userRepository.save(newUser);
+
+        restaurantService.createRestaurant(data.restaurant(), savedUser);
+
+        return savedUser;
     }
 
     public String login(AuthenticationDTO data) {

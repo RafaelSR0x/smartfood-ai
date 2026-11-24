@@ -23,6 +23,6 @@ public record RestaurantOwnerResgisterDTO(
 
         @NotNull
         @Valid
-        RestaurantRequestDTO restaurantRequestDTO
+        RestaurantRequestDTO restaurant
 ) {
 }
