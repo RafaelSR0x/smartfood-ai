@@ -1,5 +1,20 @@
 package com.smartfood.restaurant.dto.request;
 
-public record RestaurantRequestDTO(
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
+public record RestaurantRequestDTO(
+        @NotBlank
+        @Size(max = 100)
+        String name,
+        @Size(max = 500)
+        String description,
+        @NotBlank
+        @Size(max = 20)
+        String phone,
+        @NotNull
+        @Valid
+        AddressRequestDTO address
 ) { }
