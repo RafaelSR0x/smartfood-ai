@@ -9,11 +9,14 @@ public record RestaurantRequestDTO(
         @NotBlank
         @Size(max = 100)
         String name,
+
         @Size(max = 500)
         String description,
+
         @NotBlank
         @Size(max = 20)
         String phone,
+
         @NotNull
         @Valid
         AddressRequestDTO address
