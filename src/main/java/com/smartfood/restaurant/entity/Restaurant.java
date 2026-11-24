@@ -49,4 +49,9 @@ public class Restaurant {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+
+    public void assignOwner(User owner) {
+        this.owner = owner;
+    }
 }
