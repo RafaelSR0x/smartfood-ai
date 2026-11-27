@@ -1,6 +1,7 @@
 package com.smartfood.user.controller;
 
 import com.smartfood.user.dto.request.AuthenticationDTO;
+import com.smartfood.user.dto.request.RestaurantOwnerResgisterDTO;
 import com.smartfood.user.dto.request.UserRequestDTO;
 import com.smartfood.user.service.AuthenticationService;
 import jakarta.validation.Valid;
@@ -22,6 +23,13 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody UserRequestDTO data) {
         this.service.userRegister(data);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/register/restaurant-owner")
+    public ResponseEntity<Void> registerRestaurantOwner(@Valid @RequestBody RestaurantOwnerResgisterDTO data) {
+        this.service.registerRestaurantOwner(data);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
